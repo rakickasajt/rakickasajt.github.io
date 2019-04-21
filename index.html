@@ -2,18 +2,43 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Txt Reader</title>
+    <title>FastMans TV</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   </head>
   <body>
-    <h1>Player 1:<span id="textbox1">N/A</span></h1>
-    <h1>Player 2:<span id="textbox2">N/A</span></h1>
-    <h1>Player 3:<span id="textbox3">N/A</span></h1>
-    <h1>Player 4:<span id="textbox4">N/A</span></h1>
-    <h1>Player 5:<span id="textbox5">N/A</span></h1>
-    <input type='file' accept='text/plain' onchange='openFile(event)'><br>
-    <img id='output'>
+    <div id="fileloader">
+      <label for="file-upload" class="custom-file-upload" id="start-upload-button">Upload A File</label>
+    </div>
+    <div id="container">
+      <div id="sidebar">
+        <label for="file-upload" class="custom-file-upload" id="end-upload-button">Upload A File</label><br>
+        <div id="matchinfo">
+          <a href="#teams"><h1>Teams</h1></a>
+          <a href="#mappool"><h1>Map Pool</h1></a>
+          <a href="#mvp"><h1>MVP</h1></a>
+          <a href="#bo32"><h1>Group Stage</h1></a>
+          <a href="#bo16"><h1>Best of 16</h1></a>
+          <a href="#bo8"><h1>Quater Finals</h1></a>
+          <a href="#bo4"><h1>Semi Finals</h1></a>
+          <a href="#bo2"><h1>Grand Finals</h1></a>
+        </div>
+        <div id="teaminfo">
+          <a href="#teamlogo"><h1>Logo</h1></a>
+          <a href="#player1"><h1>Players</h1></a>
+        </div>
+      </div>
+      <div id="main">
+        <div id="teaminfomain">
+          <img id="teamlogo" alt="IMG N/A">
+          <h1 id="teamname">N/A<h1>
+          <h2 id="player1">N/A</h2>
+          <h2 id="player2">N/A</h2>
+          <h2 id="player3">N/A</h2>
+          <h2 id="player4">N/A</h2>
+          <h2 id="player5">N/A</h2>
+        </div>
+      </div>
+    </div>
     <script>
       var openFile = function(event) {
         var input = event.target;
@@ -21,17 +46,25 @@
         var reader = new FileReader();
         reader.onload = function(){
           var text = reader.result;
-          console.log(reader.result.substring(0, 200));
           var tekst=reader.result.split('\n');
-          document.getElementById("textbox1").innerHTML=tekst[0];
-          document.getElementById("textbox2").innerHTML=tekst[1];
-          document.getElementById("textbox3").innerHTML=tekst[2];
-          document.getElementById("textbox4").innerHTML=tekst[3];
-          document.getElementById("textbox5").innerHTML=tekst[4];
+          if(tekst[0]="team"){
+            document.getElementById("fileloader").style.display="none";
+            document.getElementById("container").style.display="block";
+            document.getElementById("teaminfo").style.display="block";
+            document.getElementById("teaminfomain").style.display="block";
+            document.getElementById("teamlogo").src="assets/team-logos/" + tekst[2] + "/" + tekst[2] + "-320.png";
+            document.getElementById("teamname").innerHTML=tekst[1];
+            document.getElementById("player1").innerHTML=tekst[3];
+            document.getElementById("player2").innerHTML=tekst[4];
+            document.getElementById("player3").innerHTML=tekst[5];
+            document.getElementById("player4").innerHTML=tekst[6];
+            document.getElementById("player5").innerHTML=tekst[7];
+          }
+
         };
         reader.readAsText(input.files[0]);
       };
-
     </script>
+    <input type='file' accept='text/plain' onchange='openFile(event)' id="file-upload"><br>
   </body>
 </html>
