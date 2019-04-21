@@ -7,7 +7,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   </head>
   <body>
-    <h1 id="textbox">Text N/A</h1>
+    <h1>Player 1:<span id="textbox1">N/A</span></h1>
+    <h1>Player 2:<span id="textbox2">N/A</span></h1>
+    <h1>Player 3:<span id="textbox3">N/A</span></h1>
+    <h1>Player 4:<span id="textbox4">N/A</span></h1>
+    <h1>Player 5:<span id="textbox5">N/A</span></h1>
     <input type='file' accept='text/plain' onchange='openFile(event)'><br>
     <img id='output'>
     <script>
@@ -19,7 +23,11 @@
           var text = reader.result;
           console.log(reader.result.substring(0, 200));
           var tekst=reader.result.split('\n');
-          document.getElementById("textbox").innerHTML=tekst[1];
+          document.getElementById("textbox1").innerHTML=tekst[0];
+          document.getElementById("textbox2").innerHTML=tekst[1];
+          document.getElementById("textbox3").innerHTML=tekst[2];
+          document.getElementById("textbox4").innerHTML=tekst[3];
+          document.getElementById("textbox5").innerHTML=tekst[4];
         };
         reader.readAsText(input.files[0]);
       };
